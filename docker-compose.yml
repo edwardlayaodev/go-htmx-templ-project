@@ -16,6 +16,6 @@ services:
     restart: always
     shm_size: 128mb
     environment:
-      POSTGRES_PASSWORD: admin
+      POSTGRES_PASSWORD: ${POSTGRES_DB_PW}
     ports:
       - "5432:5432"
