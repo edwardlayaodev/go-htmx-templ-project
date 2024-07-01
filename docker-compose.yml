@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+    command: CompileDaemon --build="go build -buildvcs=false -o main ." --command=./main
+    restart: unless-stopped
+  db:
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
